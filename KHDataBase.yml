@@ -1,0 +1,56 @@
+version: "2"
+
+services:
+  mongodb-user:
+    image: mongo:latest
+    container_name: "mongodb-user"
+    hostname: localhost
+    ports:
+      - 27017:27017
+    volumes:
+      - /db/mongo:/data/db
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+
+  mysql-user:
+    container_name: "mysql-user"
+    image: mysql
+    hostname: localhost
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=userDB
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    volumes:
+      - ./my-db2:/var/lib/mysql
+
+  neo4j-user:
+    container_name: "neo4j-user"
+    image: neo4j
+    hostname: localhost
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - ./data:/data
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    container_name: elasticsearch
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=elasticsearch
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
+      - 9300:9300

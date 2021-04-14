@@ -1,0 +1,113 @@
+<div class="container-fluid">
+  <div
+    @moveup
+    class="alert alert-danger animate__animated animate__slideInDown"
+    *ngIf="showAlert"
+    role="alert"
+  >
+    Not Authorized!
+  </div>
+  <div class="spinner-border text-primary" id="spinner" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="login-section d-flex">
+    <div class="image-section"></div>
+    <div class="form-section">
+      <form [formGroup]="loginForm">
+        <h1 class="my-4">Sign In</h1>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+              </span>
+            </div>
+            <input
+              type="email"
+              class="form-control"
+              formControlName="email"
+              [ngClass]="{
+                'is-invalid':
+                  loginForm.get('email').touched &&
+                  loginForm.get('email').invalid
+              }"
+            />
+            <div class="invalid-feedback">
+              <div>Email is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <div class="input-group">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              class="form-control"
+              formControlName="password"
+              minlength="6"
+              [ngClass]="{
+                'is-invalid':
+                  loginForm.get('password').touched &&
+                  loginForm.get('password').invalid
+              }"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i
+                  class="fa"
+                  [ngClass]="{
+                    'fa-eye-slash': !showPassword,
+                    'fa-eye': showPassword
+                  }"
+                  (click)="togglePassword()"
+                ></i>
+              </span>
+            </div>
+            <div class="invalid-feedback">
+              <div>Password is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <button
+            type="submit"
+            class="btn btn-block btn-color signin"
+            [disabled]="loginForm.invalid"
+            (click)="login()"
+          >
+            Sign In
+          </button>
+        </div>
+        <span class="d-block text-center my-4 text-muted"
+          >&mdash; or &mdash;</span
+        >
+        <div class="social-login">
+          <a
+            (click)="googleauth()"
+            class="google btn d-flex justify-content-center align-items-center"
+          >
+            <span class="icon-google mr-3"></span> Login with Google
+          </a>
+          <a
+            class="facebook btn d-flex justify-content-center align-items-center"
+          >
+            <span class="icon-facebook mr-3"></span> Login with Facebook
+          </a>
+        </div>
+        <div>
+          <p class="mt-4 d-flex justify-content-center align-items-center">
+            Not a member yet<a routerLink="/registration"
+              ><span class="space-landing">Sign-up</span></a
+            >
+          </p>
+          <p class="mt-4 d-flex justify-content-center align-items-center">
+            Have you visited the
+            <a routerLink="/"><span class="space-landing">landing</span></a>
+            page?
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

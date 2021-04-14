@@ -1,0 +1,60 @@
+<!-- <p>dictionary works!</p> -->
+<div class="container">
+    <div class="input-group searchinput" *ngIf="searchbox">
+        <input type="search" class="form-control rounded" placeholder="Search Meaning" aria-label="Search" aria-describedby="search-addon" [(ngModel)]="searchword" />
+        <button type="button" class="btn btn-outline-primary" (click)="searchmeaning()">search</button>
+    </div>
+    <div>
+        <!-- <h4>{{resultMeaning.word}}</h4> -->
+        <!-- <h2 mat-dialog-title>{{resultMeaning.word}}</h2> -->
+    </div>
+
+    <div class="card" *ngFor="let z of resultMeaning">
+        <div class="card-body" *ngFor="let n of z">
+            <!-- <h4 class="card-title">{{n.word}}</h4> -->
+            <h2 mat-dialog-title>{{n.word}}</h2>
+            <mat-dialog-content class="mat-typography">
+                <div *ngFor="let a of n.meanings">
+                    <h4 class="card-subtitle mb-2 text-muted">{{a.partOfSpeech}}</h4>
+                    <div *ngFor="let b of a.definitions">
+                        <p class="card-text">{{b.definition}}</p>
+                        <ul *ngIf="b.example?.length > 0">
+                            Example -
+                            <li>
+                                <p class="card-text">" {{b.example}} "</p>
+                            </li>
+                        </ul>
+                        <ul *ngIf="b.synonyms?.length > 0">
+                            Synonym -
+                            <li>
+                                <p class="card-text">{{b.synonyms.join(', ')}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </mat-dialog-content>
+            <mat-dialog-actions align="end">
+                <button mat-button mat-dialog-close class="border border-dark">Close</button>
+            </mat-dialog-actions>
+        </div>
+    </div>
+    <div *ngIf="errorpage">
+        <h3 style="color: red;">Meaning of the word could not found !!!...</h3>
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close>Close</button>
+        </mat-dialog-actions>
+    </div>
+    <!-- <div *ngFor="let z of resultMeaning">
+        <div *ngFor="let n of z">
+            <h4>Word - {{n.word}}</h4>
+            <div *ngFor="let a of n.meanings">
+                <h4>Part of speech - {{a.partOfSpeech}}</h4>
+                <div *ngFor="let b of a.definitions">
+                    <h4>Defination - {{b.definition}}</h4>
+                    <h4>{{b.synonyms}} </h4>
+                    <h4>Example - {{b.example}}</h4>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

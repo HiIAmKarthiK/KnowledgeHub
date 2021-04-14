@@ -1,0 +1,81 @@
+<nav class="navbar mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/dashboard" style="color: white"
+      >Knowledge Hub</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+<div class="main-container col-lg-10 col-md-10 col-sm-10 col-12 m-auto p-3">
+  <div
+    class="image-container col-lg-3 col-md-3 col-sm-4 col-4 rounded-3 m-auto"
+  >
+    <img src="data:image/png;base64,{{ details?.pic }}" alt="" />
+  </div>
+  <div
+    class="book-details col-lg-10 col-md-10 col-sm-10 col-10 m-auto d-flex flex-wrap p-3"
+  >
+    <div class="title col-lg-5 col-md-5 col-sm-10 col-12 m-1">
+      <p
+        style="
+          font-size: 36px;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+            Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        "
+      >
+        Username
+      </p>
+      <hr />
+      <p style="font-family: sans-serif">
+        <i class="fas fa-user" style="font-size: 30px; margin-right: 10px"></i
+        >{{ details?.userName | titlecase }}
+      </p>
+      <!-- <p>Email: {{details?.email}}</p> -->
+    </div>
+    <div class="email col-lg-5 col-md-5 col-sm-10 col-12 m-1">
+      <p
+        style="
+          font-size: 36px;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+            Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        "
+      >
+        Email
+      </p>
+      <hr />
+      <p>
+        <i
+          class="fas fa-envelope-open-text"
+          style="font-size: 30px; margin-right: 10px"
+        ></i>
+        {{ details?.email }}
+      </p>
+    </div>
+    <div class="user-role col-lg-5 col-md-5 col-sm-10 col-12 m-1">
+      <p
+        style="
+          font-size: 36px;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+            Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        "
+      >
+        User type
+      </p>
+      <hr />
+      <!-- <p>{{details?.userrole}}</p> -->
+      <mat-chip color="primary" selected
+        ><span style="padding: 10px; margin: 1%">{{ userRole }}</span></mat-chip
+      >
+    </div>
+  </div>
+</div>

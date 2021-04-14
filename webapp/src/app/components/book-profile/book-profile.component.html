@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/7f6d51cfed.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+      integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+      crossorigin="anonymous"
+    />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <nav class="navbar navbar-expand-lg navbar-light navbaground">
+    <div class="container-fluid">
+      <a
+        class="navbar-brand navtext"
+        routerLink="/dashboard"
+        style="font-size: 25px; color: white"
+        ><i class="fas fa-book-open" style="margin: 5px; color: white"></i>
+        Knowledge Hub</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div
+    *ngIf="role"
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title dialog-head" id="staticBackdropLabel">
+            Pay just $60 per month
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <h2>Become a premimum member today and enjoy:</h2>
+          <ol>
+            <li>
+              <strong>Access to download a book: </strong> Cannot come online
+              everytime? Use Download option to download any book and read
+              offline.
+            </li>
+            <li>
+              <strong>Access to in-built dictionary: </strong>Have a doubt about
+              a word? No worries, use the in-built dictionary to get the meaning
+              of any word instantly
+            </li>
+          </ol>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            data-bs-dismiss="modal"
+            (click)="onPay()"
+            class="btn btn-success"
+          >
+            Payment
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="main-container-fluid col-lg-11 col-md-10 col-sm-12 col-12 m-auto rounded-3 d-flex flex-wrap"
+  >
+    <div class="main-container-fluid py-2">
+      <div class="spinner-border text-primary" id="spinner" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="rounded-3">
+        <div class="main-row d-flex flex-wrap">
+          <div
+            class="image-container rounded-3 col-lg-3 col-md-3 col-sm-4 col-12"
+          >
+            <img src="data:image/png;base64,{{ details?.imageByte }}" alt="" />
+          </div>
+          <div class="book-details col-lg-8 col-md-8 col-sm-7 col-12">
+            <div class="title">
+              <h1 style="font-weight: bold">
+                {{ details?.bookTitle | titlecase }}
+              </h1>
+              <p>
+                <strong>Author: </strong> {{ details?.authorName | titlecase }}
+              </p>
+              <p>
+                <strong>Language: </strong> {{ details?.language | titlecase }}
+              </p>
+              <strong>Genre: </strong>
+              <div
+                class="flex mr-1"
+                style="margin-bottom: 10px; margin-right: 4px"
+                *ngFor="let is of details?.bookGenre"
+                class="badge bg-primary"
+              >
+                {{ is }}
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <p><strong>Description:</strong></p>
+                <div *ngIf="callChild" class="padding">
+                  <app-text-speech
+                    [description]="details?.description"
+                  ></app-text-speech>
+                </div>
+              </div>
+              <p>{{ details?.description | titlecase }}</p>
+              <div>
+                <div
+                  *ngFor="let rate of getRate(avgRating)"
+                  style="float: left"
+                >
+                  <i class="fas fa-star" style="color: gold"> </i>
+                </div>
+              </div>
+              <br />
+              <div class="book-update">
+                <h2 class="views">
+                  <i
+                    style="color: #007fff"
+                    class="far fa-eye"
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Total Views"
+                  >
+                    {{ totalViews }}</i
+                  >
+                </h2>
+                <h2 class="views">
+                  <i
+                    style="color: #e44d2e"
+                    class="fas fa-arrow-down"
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Total Downloads"
+                  >
+                    {{ totalDownloads }}</i
+                  >
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="button--group col-lg-8 col-md-10 col-sm-12 col-12 m-auto d-flex flex-wrap"
+    >
+      <!---Redirect to book reader----->
+      <button
+        type="button"
+        class="btn col-lg-3 col-md-3 col-sm-10 col-10"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+        (click)="downloadFile()"
+      >
+        Download
+      </button>
+      <button
+        type="button"
+        class="btn col-lg-3 col-md-3 col-sm-10 col-10"
+        (click)="toBookProfile()"
+      >
+        View Book
+      </button>
+      <button
+        *ngIf="!isFavourite"
+        type="button"
+        class="btn col-lg-3 col-md-3 col-sm-10 col-10"
+        (click)="addToFavourites()"
+      >
+        Favourite
+      </button>
+      <button
+        *ngIf="isFavourite"
+        type="button"
+        class="btn col-lg-3 col-md-3 col-sm-10 col-10"
+        (click)="unFavourite()"
+      >
+        Unfavourite
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="main-container-2-fluid col-lg-11 col-md-10 col-sm-12 col-12 m-auto rounded-3"
+  >
+    <div
+      class="rating col-lg-10 col-md-11 col-sm-11 col-11 m-auto"
+      style="font-size: 15px; font-weight: bold"
+    >
+      Rate {{ details?.bookTitle | titlecase }}:
+      <ngb-rating
+        [(rate)]="currentRate"
+        [max]="5"
+        style="color: gold; font-size: 30px; text-decoration: none"
+      ></ngb-rating>
+    </div>
+    <div
+      class="input-comment rounded-3 d-flex col-lg-10 col-md-11 col-sm-11 col-11 m-auto"
+    >
+      <textarea
+        class="form-control"
+        [(ngModel)]="comment"
+        rows="2"
+        placeholder="comment"
+      ></textarea>
+      <!----update the comments of the selected book-->
+      <button
+        class="btn btn-primary pull-right"
+        style="margin-left: 1%"
+        type="submit"
+        (click)="onSumitComments()"
+      >
+        Comment
+      </button>
+    </div>
+    <hr />
+    <div class="rounded-3">
+      <div class="panel">
+        <div
+          class="panel-body d-flex"
+          *ngFor="let item of details?.commentSections"
+          style="border-bottom: 1px solid black"
+        >
+          <p class="media-left">
+            <img
+              class="img-circle img-sm"
+              alt="Profile Picture"
+              src="data:image/png;base64,{{ item?.pic }}"
+            />
+          </p>
+          <div>
+            <div style="font-weight: bolder">{{ item.userName }}</div>
+            <div *ngFor="let rate of getRate(item.rating)" style="float: left">
+              <i class="fas fa-star" style="color: gold"> </i>
+            </div>
+            <br />
+            <div>{{ item.comment }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</html>

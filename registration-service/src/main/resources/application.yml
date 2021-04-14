@@ -1,0 +1,18 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 580303039108-hdhu0uhjkkgcfshfiqkahglfkrhmkbsn.apps.googleusercontent.com
+            client-secret: f57P6POnGGkPuK23CiA0fdkk
+            accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+            userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+            clientAuthenticationScheme: form
+            scope:
+              - openid
+              - email
+              - profile
+          resource:
+            userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+            preferTokenInfo: true

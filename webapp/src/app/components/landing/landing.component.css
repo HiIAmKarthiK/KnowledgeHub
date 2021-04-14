@@ -1,0 +1,322 @@
+.container-fluid {
+  width: 100vw;
+  height: 100vh;
+  background-color: #e4e3e3;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Navbar */
+
+nav ul {
+  display: flex;
+}
+
+nav ul a {
+  margin: 0 0.3rem 0 0.3rem;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  border: white solid 1px;
+  width: 6.2rem;
+  border-radius: 3px;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #204051;
+}
+
+.navbar > * {
+  margin-top: 0.7rem;
+  padding: 0 1rem;
+}
+
+.navbar a {
+  color: white;
+  padding: 0 0.3rem;
+}
+
+.cover-image-content {
+  height: 60vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.cover-image-content h1 {
+  position: absolute;
+  left: 10%;
+  right: 0;
+  top: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+/* carousel */
+
+.carousel {
+  height: 60vh;
+  width: 100vw !important;
+}
+
+.carousel-inner {
+  height: 60vh;
+  width: 100vw;
+}
+
+.carousel-item {
+  height: 60vh;
+  width: 100vw;
+}
+
+.carousel-item img {
+  height: 60vh;
+  width: 100vw;
+}
+
+.button-group .btn {
+  background-color: #204051;
+  padding: 0.5rem;
+  margin: 0 1rem 0 1rem;
+}
+
+/* cards */
+
+.col-md-4 {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card {
+  width: 28rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 15rem;
+  border: #84a9ac solid;
+  border-radius: 20px;
+  transition: ease-out 300ms;
+}
+
+.card:hover {
+  transform: scale(1.08);
+}
+
+.card h2 {
+  font-size: 1.3rem;
+}
+
+.card i {
+  color: #204051;
+}
+
+.card img {
+  width: 150px;
+  height: 150px;
+}
+
+/* Background Shape */
+
+/* .background-shape {
+  position: relative;
+
+  background: #e0efe3;
+  z-index: 1;
+}
+.background-shape:before {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 100% 50%;
+  width: 340px;
+  height: 80px;
+  background-color: white;
+  right: -5px;
+  top: 40px;
+}
+.background-shape:after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 100% 50%;
+  width: 300px;
+  height: 70px;
+  background-color: #e0efe3;
+  left: 0;
+  top: 27px;
+} */
+
+.image-content-container {
+  margin: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.image-content {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+}
+
+.image-content .image {
+  height: 50vh;
+  width: 30vw;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.image-content .content {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  line-height: 2.5rem;
+  z-index: 10;
+  background-color: #204051;
+  color: white;
+  padding: 2rem;
+  border: #84a9ac solid;
+  border-radius: 20px;
+}
+
+.content h2 {
+  font-size: 2.5rem;
+  position: relative;
+}
+
+.content > h2::after {
+  position: absolute;
+  display: block;
+  content: "";
+  height: 3px;
+  background-color: white;
+  width: 50%;
+  bottom: -25%;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms ease-in;
+}
+
+.content:hover h2::after {
+  transform: scaleX(1);
+}
+
+.content p {
+  font-size: 2rem;
+}
+
+/* Footer */
+
+.footer-section {
+  width: 100vw;
+  margin-top: 3rem;
+  background-color: #204051;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.footer-section > * {
+  line-height: 2rem;
+  margin: auto;
+}
+
+.footer-section .fontawesome {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer-section p {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: white;
+}
+
+.footer-logo a {
+  color: white;
+}
+
+.footer-help {
+  display: flex;
+  gap: 3.5rem;
+}
+
+.footer-help a {
+  color: white;
+}
+
+@media only screen and (max-width: 1200px) {
+  .cover-image-content h1 {
+    top: 40%;
+    margin-top: -2rem;
+    font-size: 3rem;
+    line-height: 3.2rem;
+  }
+
+  .card {
+    pointer-events: none;
+  }
+
+  .footer-help {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-content {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .image-content .image {
+    height: 70vh;
+    width: 80vw;
+    order: 1;
+  }
+
+  .image-content .content {
+    width: 80vw;
+    font-size: 1.5rem;
+    order: 2;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .card {
+    font-size: 0.5rem;
+    pointer-events: none;
+  }
+
+  .card h2 {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .card h2 {
+    font-size: 1.3rem;
+  }
+
+  .card {
+    pointer-events: none;
+  }
+}

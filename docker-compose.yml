@@ -1,0 +1,196 @@
+version: "2"
+
+services:
+
+  eureka-server:
+    build: eureka-server/
+    container_name: eureka-server
+    restart: always
+    #    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8085:8085
+
+
+    # config-server:
+    #   build: config-server/
+    #   container_name: config-server
+    #   restart: always
+    #   network_mode: "host"
+    #   hostname: localhost
+    #   ports:
+    #     - 8888:8888
+
+    # api-gateway:
+    #   build: api-gateway/
+    #   container_name: api-gateway
+    #   depends_on:
+    #     - config-server
+    #     - eureka-server
+    #   restart: always
+    #   network_mode: "host"
+    #   hostname: localhost
+    #   ports:
+    #     - 8080:8080
+
+
+
+  mongodb-user:
+    image: mongo:latest
+    container_name: "mongodb-user"
+    hostname: localhost
+    ports:
+      - 27017:27017
+    volumes:
+      - /db/mongo:/data/db
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+
+  mysql-user:
+    container_name: "mysql-user"
+    image: mysql
+    hostname: localhost
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=userDB
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    volumes:
+      - ./my-db2:/var/lib/mysql
+
+
+  neo4j-user:
+    container_name: "neo4j-user"
+    image: neo4j
+    hostname: localhost
+    ports:
+      - 7474:7474
+      - 7687:7687
+
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    container_name: elasticsearch
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=elasticsearch
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+  registration-service:
+    build: registration-service/
+    container_name: registration-service
+    #    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8082:8082
+    depends_on:
+      - mongodb-user
+
+
+  search-service:
+    build: search-service/
+    container_name: search-service
+    #    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8087:8087
+    depends_on:
+      - elasticsearch
+
+      #      - eureka-server
+      - rabbitmq
+
+
+  authentication-service:
+    build: authentication-service/
+    container_name: authentication-service
+    #    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8086:8086
+    depends_on:
+      - mysql-user
+
+
+
+  book-service:
+
+    build: book-service/
+    container_name: book-service
+    restart: always
+    #    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8088:8088
+    depends_on:
+      - mongodb-user
+      #      - eureka-server
+      - rabbitmq
+
+
+  recommendation-service:
+    build: recommendation-service/
+    container_name: recommendation-service
+    #    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 9191:9191
+    depends_on:
+      - neo4j-user
+      #      - eureka-server
+      - rabbitmq
+
+
+
+
+
+  dictionary-service:
+    build: dictionary-service/
+    container_name: dictionary-service
+    restart: always
+    #    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8089:8089
+  #    depends_on:
+  #      - eureka-server
+
+  webapp:
+    build: ./webapp/
+    container_name: webapp
+    #    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 4200:4200
+    volumes:
+      - "/app/node_modules"
+      - "./webapp/:/app"
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - F:/v1.0.2-updated/knowledgehub/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    #    network_mode: "host"
+    restart: always
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - 3000:3000

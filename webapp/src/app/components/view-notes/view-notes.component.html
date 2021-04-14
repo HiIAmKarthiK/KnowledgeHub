@@ -1,0 +1,125 @@
+<div class="root">
+    <nav class="navbar navbar-expand-lg navbar-light navbaground">
+        <div class="container-fluid">
+            <a class="navbar-brand navtext" routerLink="/dashboard"><i class="fas fa-book-open"> Knowledge Hub </i></a
+      >
+      <button
+        (click)="perviouspage()"
+        class="btn btn-outline-success my-2 my-sm-0"
+        type="submit"
+      >
+        back
+      </button>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="col-md-12">
+      <h1 class="heading text-center">
+        <strong> Your Important Notes</strong>
+      </h1>
+      <div class="d-flex justify-content-center px-5 p-4">
+        <div class="search">
+          <input
+            type="text"
+            class="search-input"
+            [formControl]="name"
+            placeholder=" Type keywords to get your important points"
+          />
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <div class="col-md-12" id="accordionExample">
+        <!-- <div class="row">
+          <div class="col-md-4 text-center">
+            <h2 style="color: black; font-weight: bold">Author</h2>
+            {{ item.bookAuthor }}
+          </div>
+          <div class="col-md-4 text-center">
+            <h2 style="color: black; font-weight: bold">Title</h2>
+            {{ item.bookTitle }}
+          </div>
+          <div class="col-md-3 text-center">
+            <h2 style="color: black; font-weight: bold">No. of Notes</h2>
+            {{ item.notes.length }}
+          </div>
+        </div> -->
+        <div>
+          <div
+            class="issue-card"
+            *ngFor="let item of notesData | filter: nameSearch; let i = index"
+          >
+            <ng-container>
+              <div class="accordion mb-3">
+                <div class="open" *ngIf="nameSearch.length == 0">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <div
+                        class="accordion-button btn"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#collapseOne' + i"
+                        aria-expanded="false"
+                        aria-controls="collapseOne"
+                      >
+                        <div class="col-md-4 text-center">
+                          <span style="color: black">Author : </span>
+                          {{ item.bookAuthor | titlecase}}
+                        </div>
+                        <div class="col-md-4 text-center">
+                          <span style="color: black">Title : </span>
+                          {{ item.bookTitle | titlecase }}
+                        </div>
+                        <div class="col-md-3 text-center">
+                          <span style="color: black">No. of Notes : </span>
+                          {{ item.notes.length }}
+                        </div>
+                      </div>
+                    </h2>
+                    <div
+                      [id]="'collapseOne' + i"
+                      class="accordion-collapse collapse show"
+                      aria-labelledby="headingOne"
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div class="accordion-body">
+                        <div class="row">
+                          <div class="col-md-2 cnt">
+                            <p>
+                              <strong>Page No.</strong>
+                            </p>
+                          </div>
+                          <div class="col-md-10 cnt">
+                            <p>
+                              <strong>Notes</strong>
+                            </p>
+                          </div>
+                        </div>
+                        <hr />
+                        <div *ngFor="let is of item.notes">
+                          <div class="row">
+                            <div class="col-md-2 cnt">
+                              <p>
+                                <strong>{{ is.page }}</strong>
+                              </p>
+                            </div>
+                            <div class="col-md-10 cnt">
+                              <p style="text-align: left">
+                                <strong>{{ is.notes }}</strong>
+                              </p>
+                            </div>
+                          </div>
+                          <hr />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

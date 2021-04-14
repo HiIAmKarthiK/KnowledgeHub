@@ -1,0 +1,113 @@
+version: "2"
+
+services:
+  eureka-server:
+    build: eureka-server/
+    container_name: eureka-server
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8085:8085
+
+  api-gateway:
+    build: api-gateway/
+    container_name: api-gateway
+    depends_on:
+      - eureka-server
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8080:8080
+
+  registration-service:
+    build: registration-service/
+    container_name: registration-service
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8082:8082
+    depends_on:
+      - eureka-server
+
+  authentication-service:
+    build: authentication-service/
+    container_name: authentication-service
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8086:8086
+    depends_on:
+      - eureka-server
+
+  search-service:
+    build: search-service/
+    container_name: search-service
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8087:8087
+    depends_on:
+      - eureka-server
+
+  book-service:
+    build: book-service/
+    container_name: book-service
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8088:8088
+    depends_on:
+      - eureka-server
+
+  recommendation-service:
+    build: recommendation-service/
+    container_name: recommendation-service
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 9191:9191
+    depends_on:
+      - eureka-server
+
+  dictionary-service:
+    build: dictionary-service/
+    container_name: dictionary-service
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8089:8089
+    depends_on:
+      - eureka-server
+
+  webapp:
+    build: ./webapp/
+    container_name: webapp
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 4200:4200
+    volumes:
+      #      - "/app/node_modules"
+      - "./webapp/:/app"
+
+#  prometheus:
+#    image: prom/prometheus:latest
+#    container_name: prometheus
+#    volumes:
+#      - /home/karthik/Experimental/knowledgehub/prometheus.yml:/etc/prometheus/prometheus.yml
+#    ports:
+#      - 9090:9090
+#    #    network_mode: "host"
+#    restart: always
+#
+#
+#
+#  grafana:
+#    image: grafana/grafana:latest
+#    container_name: grafana
+#    ports:
+#      - 3000:3000

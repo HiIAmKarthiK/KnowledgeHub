@@ -1,0 +1,25 @@
+.volume {
+    color: green;
+    size: 2px;
+}
+
+.pause {
+    color: blue;
+    size: 2px;
+}
+
+.stop {
+    color: red;
+    size: 2px;
+}
+
+.resume {
+    color:seagreen;
+    size: 2px;
+}
+
+.warn {
+    color: red;
+    size: 2px;
+    padding-left: 2px;
+}

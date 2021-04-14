@@ -1,0 +1,275 @@
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <nav class="navbar navbar-expand-lg navbar-light navbaground fixed-top">
+      <div class="container-fluid">
+        <a
+          class="navbar-brand navtext"
+          (click)="goToDashboard()"
+          style="font-size: 25px"
+          ><i class="fas fa-book-open" style="margin: 5px"></i>Knowledge Hub</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle navtext navbutton optionbtn"
+                style="font-size: 15.5px"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Options
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" (click)="pdfModeswitch(true)"
+                    >PDF Mode<i
+                      *ngIf="pdfMode"
+                      class="fas fa-check clickoption"
+                    ></i
+                  ></a>
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="pdfModeswitch(false)"
+                    >Page Mode<i
+                      *ngIf="!pdfMode"
+                      class="fas fa-check clickoption"
+                    ></i
+                  ></a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                  <a class="dropdown-item">Zoom</a>
+                </li>
+                <li>
+                  <mat-slider
+                    class="example-margin dropdown-item"
+                    style="width: 20em"
+                    [disabled]="disabled"
+                    [invert]="invert"
+                    [max]="max"
+                    [min]="min"
+                    [step]="step"
+                    [thumbLabel]="thumbLabel"
+                    [tickInterval]="getSliderTickInterval()"
+                    [(ngModel)]="value"
+                    [vertical]="vertical"
+                  >
+                  </mat-slider>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <button
+                class="btn navtext navbutton"
+                type="button "
+                (click)="perviouspage()"
+              >
+                Back
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="btn navtext navbutton"
+                style="cursor: pointer"
+                type="button "
+                (click)="sidenav.toggle()"
+              >
+                Add Note
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="btn navtext navbutton"
+                style="cursor: pointer"
+                type="button "
+                (click)="viewnote()"
+              >
+                View Notes
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="btn navtext navbutton"
+                style="cursor: pointer"
+                type="button "
+                (click)="openDialog()"
+              >
+                Dictionary
+              </button>
+            </li>
+          </ul>
+          <div class="d-flex" *ngIf="!pdfMode">
+            <input
+              type="number"
+              class="form- textsize"
+              id="page"
+              style="width: 80px"
+              [(ngModel)]="jumPage"
+              placeholder="Page No"
+              aria-label="Example text with button addon"
+              aria-describedby="button-addon1"
+              max="{{ lastpage }}"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              style="color: antiquewhite; background-color: #3c7a9b"
+              id="button-addon1"
+              (click)="setPage()"
+            >
+              <b>Go</b>
+              <i class="fas fa-angle-double-right fa-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="main-content" style="margin-top: 5em">
+      <div class="spinner-border text-primary" id="spinner" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="container">
+        <div class="d-flex flex-column bd-highlight mb-3">
+          <div class="p-2 bd-highlight">
+            <div class="d-flex justify-content-evenly">
+              <div class="p-2 bd-highlight">
+                <input
+                  *ngIf="isDisabled"
+                  type="file"
+                  id="file"
+                  (change)="onFileSelected()"
+                />
+              </div>
+              <div class="p-2 bd-highlight" *ngIf="!pdfMode">
+                <h3 style="color: black">page no {{ page }}</h3>
+              </div>
+              <div class="p-2 bd-highlight" *ngIf="!pdfMode"></div>
+            </div>
+          </div>
+          <div class="p-2 bd-highlight" style="margin-top: -1.5em">
+            <div class="d-flex justify-content-center">
+              <div class="p-2 bd-highlight" *ngIf="!pdfMode">
+                <button
+                  type="button"
+                  class="btn buttonset"
+                  (click)="pagePrev()"
+                >
+                  <i class="fas fa-chevron-left fa-10x colourbtn"></i>
+                </button>
+              </div>
+              <div
+                class="p-2 bd-highlight border border-dark shadow p-3 mb-5 bg-body rounded"
+              >
+                <div class="d-flex justify-content-center" *ngIf="loadBook">
+                  <div class="p-2 bd-highlight">
+                    <pdf-viewer
+                      [src]="pdfSrc"
+                      [render-text]="true"
+                      [page]="page"
+                      [show-all]="pdfMode"
+                      [original-size]="true"
+                      [zoom]="value"
+                      [render-text-mode]="2"
+                      style="display: block"
+                    ></pdf-viewer>
+                  </div>
+                </div>
+              </div>
+              <div class="p-2 bd-highlight" *ngIf="!pdfMode">
+                <button
+                  type="button"
+                  class="btn buttonset"
+                  (click)="pageNext()"
+                >
+                  <i class="fas fa-chevron-right fa-10x colourbtn"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="p-2 bd-highlight"></div>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<mat-sidenav
+  style="margin-top: 4.7rem; max-height: initial"
+  mode="side"
+  #sidenav
+  opened
+  position="end"
+>
+  <span
+    type="button"
+    class="btn-close ml-2"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+    (click)="sidenav.toggle()"
+  ></span>
+  <div class="m-4" (submit)="sendNote()">
+    <div class="form-group">
+      <h3 for="exampleInputPassword1">Add Note</h3>
+      <textarea
+        type="text"
+        [(ngModel)]="notes"
+        class="form-control"
+        id="exampleInputPassword1"
+        (click)="resetTextarea()"
+        placeholder="Add note here"
+      ></textarea>
+      <p *ngIf="val" class="text-danger mt-1">Add note is required</p>
+    </div>
+    <h2>
+      <span
+        type="submit"
+        class="badge bg-primary mt-2"
+        (click)="sendNote()"
+        (click)="getNotesData()"
+      >
+        Submit
+      </span>
+    </h2>
+    <div class="success" *ngIf="sent">
+      <div
+        class="alert alert-success alert-dismissible fade show"
+        role="alert "
+      >
+        <strong>Saved!</strong> Your Notes is saved.
+        <span
+          type="button "
+          class="btn-close"
+          data-bs-dismiss="alert "
+          aria-label="Close "
+          (click)="closedAlert()"
+        ></span>
+      </div>
+    </div>
+    <div style="width: 20rem">
+      <div class="notes" *ngFor="let item of notesData">
+        <div *ngIf="item.bookTitle == bookTitle">
+          <div class="mt-3" *ngFor="let it of item.notes; let i = it">
+            <div class="row opened" *ngIf="it.page == page">
+              <div class="col-md-12 m-3">
+                <p style="margin-right: 2rem">{{ it.notes }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-sidenav>

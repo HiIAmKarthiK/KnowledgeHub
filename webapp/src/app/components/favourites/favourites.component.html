@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-light navbaground">
+  <div class="container-fluid">
+    <a class="navbar-brand navtext" routerLink="/dashboard"
+      ><i class="fas fa-book-open"></i> Knowledge Hub</a
+    >
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+<div class="container-fluid favourites-stacker pt-5">
+  <div *ngIf="favouriteBooks.length != 0">
+    <h1>Favourite Books</h1>
+  </div>
+
+  <div class="favouriteBooks-books mt-2" *ngIf="favouriteBooks.length != 0">
+    <div class="row">
+      <div class="col-md-3 mt-4" *ngFor="let book of favouriteBooks">
+        <div class="card" style="width: 19rem" (click)="toBookProfile(book)">
+          <img
+            class="card-img-top"
+            src="data:image/png;base64,{{ getBookImage(book) }}"
+            alt="Card image cap"
+          />
+          <div class="card-body" (click)="$event.stopPropagation()">
+            <h2 class="card-title">{{ book.bookTitle | titlecase }}</h2>
+            <h4 class="card-text">Author: {{ book.authorName | titlecase }}</h4>
+            <p class="card-text">
+              {{ book.description }}
+            </p>
+            <div class="button--group">
+              <h2 class="views">
+                <i style="color: #007fff" class="fas fa-binoculars"></i
+                >{{ getBookViews(book) }}
+              </h2>
+              <h2 class="views">
+                <i style="color: #e44d2e" class="fas fa-arrow-down"></i
+                >{{ getBookDownloads(book) }}
+              </h2>
+              <!-- <a class="btn btn-primary" (click)="toBookProfile(book)"
+                >View Book</a
+              > -->
+
+              <a class="pe-3" (click)="unFavourite(book)"
+                ><i style="color: red" class="fas fa-heart fa-2x"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="no-favourites-msg" *ngIf="favouriteBooks.length == 0">
+    <h1>No Favourite Books Available</h1>
+  </div>
+</div>

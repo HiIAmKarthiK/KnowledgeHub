@@ -1,0 +1,136 @@
+.container-fluid {
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.spinner-border {
+  position: absolute;
+  left: 50%;
+  top: 2.5rem;
+  z-index: 10;
+}
+
+.login-section {
+  height: 100vh;
+  width: 100vw;
+}
+
+.image-section {
+  width: 50%;
+  height: 100%;
+  background: url("../../../assets/images/book-cover.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Forms */
+
+.form-section {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-section h1 {
+  font-size: 2.6rem;
+}
+
+.login-section label {
+  font-size: 1.1rem;
+}
+
+.login-section input + i,
+button {
+  padding: 1rem;
+  width: 25vw;
+}
+
+.login-section i {
+  padding: 1rem;
+}
+
+button {
+  width: 25vw;
+  color: white;
+  background-color: #204051;
+}
+
+.login-section button:hover {
+  color: white;
+  background-color: #083852;
+}
+
+.social-login a {
+  display: block;
+  text-decoration: none;
+  position: relative;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 10px;
+  padding: 1rem;
+}
+.social-login a:hover {
+  color: #fff;
+}
+.social-login a.facebook {
+  background: #3b5998;
+}
+.social-login a.facebook:hover {
+  background: #344e86;
+}
+.social-login a.twitter {
+  background: #1da1f2;
+}
+.social-login a.twitter:hover {
+  background: #0d95e8;
+}
+.social-login a.google {
+  background: #ea4335;
+}
+.social-login a.google:hover {
+  background: #e82e1e;
+}
+
+/* Alerts */
+.alert {
+  position: absolute;
+  top: 5%;
+  left: 45%;
+}
+
+/* .anim {
+  top: 20%;
+} */
+
+.animate__animated.animate__slideInDown {
+  --animate-duration: 400ms;
+}
+
+@media only screen and (max-width: 1213px) {
+  .login-section {
+    flex-direction: column;
+  }
+  .image-section,
+  .form-section {
+    width: 100%;
+  }
+  .form-section {
+    margin: 1.2rem 0;
+  }
+  .form-section input + i,
+  button,
+  .social-login a {
+    width: 50vw;
+  }
+  .container-fluid {
+    overflow: scroll;
+  }
+}
+
+.space-landing {
+  padding: 0 0.2rem;
+}

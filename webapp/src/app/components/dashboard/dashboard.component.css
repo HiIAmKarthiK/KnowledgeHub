@@ -1,0 +1,187 @@
+/* general */
+
+.books > h2 {
+  font-size: 2.5rem;
+}
+
+.navbaground {
+  background-color: #204051;
+}
+
+.dialog-head {
+  font-weight: bold;
+  color: rgb(14, 79, 177);
+  font-size: larger;
+} 
+
+nav,
+nav .container-fluid {
+  width: 100%;
+}
+
+.navbar .container-fluid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navtext {
+  color: antiquewhite !important;
+  text-decoration: none;
+}
+
+.search {
+  display: flex;
+  gap: 1rem;
+  width: 50%;
+  justify-content: center;
+}
+
+.search input {
+  width: 35%;
+  transition: width 500ms ease-out;
+}
+
+.search input:focus {
+  width: 45%;
+}
+
+.search .fa-search {
+  color: white;
+  margin-top: 0.5rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.search input .fa-search:hover {
+  width: 45%;
+}
+
+.search .fa-microphone {
+  font-size: 1rem;
+}
+
+.userprofile {
+  align-items: center;
+  display: flex;
+  gap: 0.8rem;
+}
+
+p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.img-sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.userName {
+  font-size: medium;
+  color: #e4e3e3;
+  display: flex;
+  gap: 0.7rem;
+}
+
+.userName p {
+  margin-top: 0.7rem;
+}
+
+/* profile buttons */
+
+.tile i {
+  font-weight: normal;
+  font-size: 1.3rem;
+  padding-right: 0.8rem;
+}
+
+/* Cards */
+
+.card a.btn {
+  background-color: #204051;
+}
+
+.card .fa-heart {
+  cursor: pointer;
+}
+
+.card .far {
+  color: black;
+}
+
+.card .card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.card-body .button--group {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: start;
+  gap: 1rem;
+}
+
+.button--group i {
+  font-size: 1.4rem;
+}
+
+.fa-binoculars,
+.fa-arrow-down {
+  cursor: grab;
+}
+
+.genre-stacker {
+  display: flex;
+  flex-direction: column;
+  background-color: #e4e3e3;
+  margin-top: 0 !important;
+  position: relative;
+}
+
+.spinner-border {
+  position: absolute;
+  left: 50%;
+  top: 2.5rem;
+  z-index: 10;
+}
+
+.card img {
+  height: 250px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1000px) {
+  .books,
+  .row,
+  .col-md-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  nav .container-fluid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .search,
+  .search input {
+    width: 70%;
+  }
+
+  .search input:focus {
+    width: 70%;
+  }
+}

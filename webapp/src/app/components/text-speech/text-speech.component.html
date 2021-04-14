@@ -1,0 +1,21 @@
+<div *ngIf="supported; else notSupported">
+  <button mat-icon-button class="volume" (click)="startAudio()" matTooltip="Start reading" *ngIf="!speaking; else second">
+    <mat-icon>volume_up</mat-icon>
+  </button>
+  <ng-template #second>
+    <button mat-icon-button class="stop" matTooltip="Stop reading" (click)="stopAudio()">
+      <mat-icon>stop</mat-icon>
+    </button>
+    <button mat-icon-button class="pause" matTooltip="Pause reading" (click)="pauseAudio()" *ngIf="!paused; else resumeSpeaking">
+      <mat-icon>pause</mat-icon>
+    </button>
+    <ng-template #resumeSpeaking>
+      <button mat-icon-button class="resume" matTooltip="Resume reading" (click)="resumeAudio()">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    </ng-template>
+  </ng-template>
+</div>
+<ng-template #notSupported>
+  <p class="warn">Text-To-Voice not supported in this browser...</p>
+</ng-template>

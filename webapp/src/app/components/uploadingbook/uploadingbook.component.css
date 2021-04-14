@@ -1,0 +1,115 @@
+.navbaground {
+  background-color: #204051;
+}
+
+.button {
+  background: rgb(68, 120, 137);
+}
+
+.button:hover {
+  background: #264b69;
+  color: white;
+}
+
+.navtext {
+  color: antiquewhite !important;
+}
+
+.nav {
+  position: sticky;
+}
+
+.body {
+  min-height: 93vh;
+  width: 100%;
+  padding: 50px;
+  background: url("/assets/images/book-cover2.jpg") top right/cover;
+}
+
+.loading-bar {
+  width: 950px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  margin: 0 auto;
+}
+
+.wrapper--w960 {
+  max-width: 960px;
+}
+
+.container-fluid {
+  overflow: hidden;
+  -webkit-border-radius: 13px;
+  -moz-border-radius: 13px;
+  border-radius: 13px;
+}
+
+.imagebox {
+  background: url("/assets/images/book-cover.jpg") top right / cover;
+  width: 400px;
+  height: 550px;
+  margin: 0;
+}
+.image-wrap {
+  padding: 10px;
+  border: solid 1px #e0e0e0;
+  display: inline-block;
+}
+
+.img-space {
+  border: dashed 1px #d3d3d3;
+  border-radius: 8px;
+  background-color: #f2f2f2;
+  width: 100%;
+  padding: 10px;
+}
+
+.img-space img {
+  width: 100%;
+  height: 380px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.fileInputProfileWrap {
+  width: 80%;
+  height: 350px;
+}
+
+.fileInputProfile {
+  position: absolute;
+  height: 60%;
+  width: 20%;
+  z-index: 99;
+  opacity: 0;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.row-space {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.example-full-width {
+  width: 100%;
+}
+.example-full-width1 {
+  width: 100%;
+}
